@@ -1,43 +1,51 @@
+// MODELE DE L'UTILISATEUR
+
+const { Sequelize} = require('sequelize');
 
 
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:',{define : {
-    freezeTableName : true
-}});
-
-const User = sequelize.define('User', {
+module.exports = (sequelize, DataTypes) => {
+const User = sequelize.define('User', 
+ {
   
-  user_id: {
+  id: {
     type: DataTypes.INTEGER,
+    primaryKey : true,
 
-    allowNull: false
+    allowNull: true
   },
   email: {
     type: DataTypes.STRING,
-    allowNull : false, 
-    unique : true
+    allowNull : true, 
+    /*unique : true*/
 },
   username: {
     type : DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   }, 
-  password : {
+  password: {
       type: DataTypes.STRING,
-      allowNull : false
+      allowNull : true
   },
   avatar_url :{
       type : DataTypes.STRING,
       allowNull: true
   },
   date_created:{
-      type : Sequelize.DATE
+      type : Sequelize.DATE,
+      allowNull : true
   },
   admin :{
       type : Sequelize.BOOLEAN,
-      defaultValue : false
+      defaultValue : true
   }
+
+
   
-});
+
+  
+}, {freezeTableName : true, timestamps : false} )
 
 
-console.log(User === sequelize.models.User); // true
+ return User ;
+
+};
