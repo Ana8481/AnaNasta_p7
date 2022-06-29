@@ -1,51 +1,28 @@
-// MODELE DE L'UTILISATEUR
-
-const { Sequelize} = require('sequelize');
-
-
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-const User = sequelize.define('User', 
- {
-  
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey : true,
-
-    allowNull: true
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull : true, 
-    /*unique : true*/
-},
-  username: {
-    type : DataTypes.STRING,
-    allowNull: true
-  }, 
-  password: {
-      type: DataTypes.STRING,
-      allowNull : true
-  },
-  avatar_url :{
-      type : DataTypes.STRING,
-      allowNull: true
-  },
-  date_created:{
-      type : Sequelize.DATE,
-      allowNull : true
-  },
-  admin :{
-      type : Sequelize.BOOLEAN,
-      defaultValue : true
+  class user extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
   }
-
-
-  
-
-  
-}, {freezeTableName : true, timestamps : false} )
-
-
- return User ;
-
+  user.init({
+    email: DataTypes.STRING,
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
+    avatarUrl: DataTypes.STRING,
+    dateCreated: DataTypes.DATE,
+    admin: DataTypes.BOOLEAN
+  }, {
+    sequelize,
+    modelName: 'user',
+  });
+  return user;
 };

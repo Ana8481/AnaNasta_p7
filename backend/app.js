@@ -4,6 +4,10 @@ const helmet = require("helmet");
 
 const path = require('path');
 
+
+const db = require('./connectionDb');
+
+
 //importation du routeur correspondant aux utilisateurs
 const user = require("./routes/user");
 
@@ -21,6 +25,12 @@ const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
 const app = express();
+
+
+
+db.sync()
+.then(console.log("connection réussie à la base de donnée"))
+.catch(error => console.log(error));
 
 
 app.use(express.urlencoded({ extended: true }));

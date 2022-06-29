@@ -1,45 +1,27 @@
-// MODELE DU POST
-
-
-const { Sequelize } = require('sequelize');
-
-
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-const Post = sequelize.define('Post', {
-  // Model attributes are defined here
-  post_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  user_id: {
-    type: DataTypes.INTEGER,
-    allowNull : false
-  },
-  
-  post :{
-      type: DataTypes.STRING,
-    
-  },
-  image_url :{
-    type : DataTypes.STRING,
-    allowNull : true
-  },
-  date_created: {
-      type: DataTypes.INTEGER,
-      allowNull : false
-
-      //CHANGER par true pour TESTER SUR POSTMAN
-  },
-  date_updated: {
-    type : DataTypes.INTEGER
+  class post extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
   }
-
-})
-
-
-return Post;
+  post.init({
+    userId: DataTypes.INTEGER,
+    post: DataTypes.STRING,
+    imageUrl: DataTypes.STRING,
+    dateCreated: DataTypes.INTEGER,
+    dateUpdated: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'post',
+  });
+  return post;
 };
-
-
-
-
